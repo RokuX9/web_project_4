@@ -1,0 +1,12 @@
+@import url("../vendor/normalize.css");
+@import url("../vendor/fonts/inter/inter.css");
+@import url("../blocks/body.css");
+@import url("../blocks/page.css");
+@import url("../blocks/header.css");
+@import url("../blocks/dash.css");
+@import url("../blocks/locations.css");
+@import url("../blocks/location.css");
+@import url("../blocks/footer.css");
+@import url("../blocks/overlay.css");
+@import url("../blocks/form.css");
+@import url("../blocks/button.css");

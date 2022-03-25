@@ -1,0 +1,45 @@
+.location {
+    background-color: white;
+    width: fit-content;
+    border-radius: 10px;
+}
+
+.location__image {
+    height: 282px;
+    width: 282px;
+}
+
+.location__row {
+    padding: 25px 15px 31px 21px;
+    display: flex;
+    width: 246px;
+    
+}
+
+.location__title {
+    display: inline-block;
+    margin: 0;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.location__like-button {
+    background-color: white;
+    background-image: url("../images/heart.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: 0px;
+    height: 19px;
+    width: 21px;
+    display: inline-block;
+    margin-left: auto;
+    align-self: center;
+}
+
+.location__like-button_type_active {
+    background-image: url("../images/heart-black.svg");
+}
