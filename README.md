@@ -1,16 +1,13 @@
 # Project 4: Around The U.S.
 
-### Overview
+## Intro
 
-* Figma
-* Images
+This project is uses javascript to add functionality to the site, as well as all other skills already taught like responsive design.
 
-**Figma**
+## Technologies
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+HTML, CSS, Javascript
 
-**Images**
+## Things to improve
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
-
-Have fun with JavaScript!
+More functionality, add cards dynamically.
