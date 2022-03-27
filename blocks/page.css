@@ -1,8 +1,6 @@
 .page {
-    position: relative;
     max-width: 880px;
     margin: auto;
-    font-family: 'Inter', 'Ariel', sans-serif;
 }
 
 @media screen and (max-width:900px) {

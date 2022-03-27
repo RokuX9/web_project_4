@@ -1,8 +1,7 @@
 .overlay {
-    position: absolute;
+    position: fixed;
     z-index: 1;
-    opacity: .5;
-    background-color: black;
+    background-color: rgba(0,0,0,.5);
     top: 0;
     height: 100%;
     width: 100%;
@@ -10,5 +9,42 @@
 }
 
 .overlay__opened {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay__dash-form {
+    position: relative;
+    z-index: 2;
+    width: 430px;
+}
+
+.overlay__button_type_close {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    position: absolute;
+    right: -40px;
+    top: -40px;
+    transform: rotate(45deg);
+    border: 0px;
+    background-color: transparent;
+    background-image: url("../images/plus.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+@media screen and (max-width: 900px) {
+    
+    .overlay__dash-form{
+        width: 282px;
+    }
+
+    .overlay__button_type_close {
+        height: 26px;
+        width: 26px;
+        right: 0;
+        top: -42px;
+    }
 }

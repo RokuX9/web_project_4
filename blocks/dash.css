@@ -23,6 +23,7 @@
 
 .dash__line {
     width: -webkit-fill-available;
+    display: flex;
 }
 
 
@@ -30,7 +31,11 @@
     margin: 0;
     font-weight: 500;
     font-size: 42px;
-    display: inline-block;
+    max-width: 400px;
+    padding: 15px 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;   
 }
 
 .dash__button_type_edit-info {
@@ -38,7 +43,7 @@
     background-size: 10px 10px;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: black;
+    background-color: transparent;
     border: 1px solid white;
     height: 24px;
     width: 24px;
@@ -60,20 +65,20 @@
     background-size: 22px 22px;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: black;
+    background-color: transparent;
     border: 2px solid white;
+    border-radius: 2px;
     height: 50px;
     width: 150px;
     margin-left: auto;
 }
 
-.dash__form {
-    position: absolute;
-    z-index: 2;
-    width: 430px;
-    top: 145px;
-    left: 225px;
-    border-radius: 10px;
+.dash__button_type_edit-info:hover {
+    opacity: .6;
+}
+
+.dash__button_type_add-place:hover {
+    opacity: .6;
 }
 
 @media screen and (max-width: 900px) {
@@ -89,11 +94,17 @@
         text-align: center;
         margin-top: 30px;
     }
+    
+    .dash__line {
+        justify-content: center;
+    }
 
     .dash__user-title {
         font-size: 22px;
         line-height: 27px;
-        padding-left: 29px;
+        max-width: 200px;
+        padding-top: 0;
+        padding-bottom: 0;
     }
 
     .dash__button_type_edit-info {
@@ -105,17 +116,13 @@
 
     .dash__user-subtitle {
         padding-top: 14px;
+        font-size: 14px;
+        line-height: 17px;
     }
 
     .dash__button_type_add-place {
         margin-left: 0;
         margin-top: 36px;
         width: -webkit-fill-available;
-    }
-
-    .dash__form{
-        top: 95px;
-        left: 19px;
-        width: 282px;
     }
 }
