@@ -8,7 +8,7 @@
     display: none;
 }
 
-.overlay__opened {
+.overlay_type_opened {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,6 +33,10 @@
     background-image: url("../images/plus.svg");
     background-size: cover;
     background-position: center;
+}
+
+.overlay__button_type_close:hover {
+    opacity: .6;
 }
 
 @media screen and (max-width: 900px) {

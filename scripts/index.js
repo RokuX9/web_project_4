@@ -20,16 +20,16 @@ domElements.editButton.addEventListener("click", ()=>{
     const {userTitle, userSubtitle, nameInput, subtitleInput, overlay} = domElements;
     nameInput.value = userTitle.textContent;
     subtitleInput.value = userSubtitle.textContent;
-    overlay.classList.toggle("overlay__opened");
+    overlay.classList.toggle("overlay_type_opened");
 })
 domElements.closeButton.addEventListener("click", (e)=>{
-    domElements.overlay.classList.toggle("overlay__opened");
+    domElements.overlay.classList.toggle("overlay_type_opened");
 })
 domElements.form.addEventListener("submit", (e)=>{
     e.preventDefault();
     const {userTitle, userSubtitle, nameInput, subtitleInput, overlay} = domElements;
     userTitle.textContent = nameInput.value
     userSubtitle.textContent = subtitleInput.value
-    overlay.classList.toggle("overlay__opened");
+    overlay.classList.toggle("overlay_type_opened");
 
 })
