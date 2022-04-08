@@ -28,48 +28,7 @@
                 <button type="button" class=" dash__button dash__button_type_add-place button"></button>
             </section>
             <section class="locations">
-                <div class="locations__card location">
-                    <img src="./images/yosemity-valley.png" alt="yosemity-valley" class="location__image">
-                    <div class="location__row">
-                        <h2 class="location__title">Yosemite Valley</h2>
-                        <button type="button" class="location__like-button button"></button>
-                    </div>
-                </div>
-                <div class="locations__card location">
-                    <img src="./images/lake-louise.png" alt="lake-louise" class="location__image">
-                    <div class="location__row">
-                        <h2 class="location__title">Lake Louise</h2>
-                        <button type="button" class="location__like-button button"></button>
-                    </div>
-                </div>
-                <div class="locations__card location">
-                    <img src="./images/bald-mountains.png" alt="bald-mountains" class="location__image">
-                    <div class="location__row">
-                        <h2 class="location__title">Bald Mountains</h2>
-                        <button type="button" class="location__like-button button"></button>
-                    </div>
-                </div>
-                <div class="locations__card location">
-                    <img src="./images/latemar.png" alt="latemar" class="location__image">
-                    <div class="location__row">
-                        <h2 class="location__title">Latemar</h2>
-                        <button type="button" class="location__like-button button"></button>
-                    </div>
-                </div>
-                <div class="locations__card location">
-                    <img src="./images/vanoise-national.png" alt="yosemity-valley" class="location__image">
-                    <div class="location__row">
-                        <h2 class="location__title">Vanoise National Park</h2>
-                        <button type="button" class="location__like-button button"></button>
-                    </div>
-                </div>
-                <div class="locations__card location">
-                    <img src="./images/lago-di-braies.png" alt="Lago di Braies" class="location__image">
-                    <div class="location__row">
-                        <h2 class="location__title">Lago di Braies</h2>
-                        <button type="button" class="location__like-button button"></button>
-                    </div>
-                </div>
+                
             </section>
         </main>
         <footer class="footer">
@@ -77,19 +36,44 @@
         </footer>
     </div>
     <div class="overlay">
-        <div class="overlay__dash-form">
+        <div class="overlay__form overlay__form_type_dash-form">
             <form name="dash-form" class="form">
                 <h2 class="form__title">Edit Profile</h2>
                 <fieldset class="form__inputs">
-                    <input type="text" placeholder="Name" name="title" class="form__input form__input_type_name">
-                    <input type="text" placeholder="Subtitle" name="subtitle" class="form__input form__input_type_subtitle">
+                    <input type="text" placeholder="Name" name="title" class="form__input form__input_type_dash-name">
+                    <input type="text" placeholder="Subtitle" name="subtitle" class="form__input form__input_type_dash-subtitle">
                 </fieldset>
                 <button type="submit" class="form__button form__button_type_save button">Save</button>
             </form>
             <button type="button" class="overlay__button overlay__button_type_close button"></button>
         </div>
-        
+        <div class="overlay__form overlay__form_type_location">
+            <form name="dash-form" class="form">
+                <h2 class="form__title">New Place</h2>
+                <fieldset class="form__inputs">
+                    <input type="text" placeholder="Location Name" name="title" class="form__input form__input_type_location-name">
+                    <input type="text" placeholder="Location image URL" name="subtitle" class="form__input form__input_type_location-image-url">
+                </fieldset>
+                <button type="submit" class="form__button form__button_type_save button">Save</button>
+            </form>
+            <button type="button" class="overlay__button overlay__button_type_close button"></button>
+        </div>
+        <div class="overlay__location">
+            <img src="" alt="" class="overlay__image">
+            <p class="overlay__location-name"></p>
+            <button type="button" class="overlay__button overlay__button_type_close button"></button>
+        </div>
     </div>
+    <template id="location-template">
+        <div class="locations__card location">
+            <button type="button" class="location__button location__button_type_delete button"></button>
+            <img src="" alt="" class="location__image">
+            <div class="location__row">
+                <h2 class="location__title"></h2>
+                <button type="button" class="location__button location__button_type_like button"></button>
+            </div>
+        </div>
+    </template>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
