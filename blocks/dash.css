@@ -38,13 +38,6 @@
     overflow: hidden;   
 }
 
-.dash__user-subtitle{
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 400px; 
-}
-
 .dash__button_type_edit-info {
     background-image: url("../images/pencil.svg");
     background-size: 10px 10px;
@@ -65,6 +58,10 @@
     font-size: 18px;
     line-height: 22px;
     padding-top: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 400px; 
 }
 
 .dash__button_type_add-place {
