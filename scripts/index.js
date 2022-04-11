@@ -18,35 +18,26 @@ const domElements = {
     imageOverlayContainer: document.querySelector(".overlay__location"),
     imageOverlayElement: document.querySelector(".overlay__image"),
     imageOverlayText: document.querySelector(".overlay__location-name"),
-    closeimageOverlayButton: document.querySelector(".overlay__location .overlay__button_type_close")
+    closeImageOverlayButton: document.querySelector(".overlay__location .overlay__button_type_close")
 }
 
-function toggleDashForm(){
-    const {dashForm, overlay} = domElements;
-    if (overlay.classList.contains("overlay_type_opened")) {
-        overlay.classList.toggle("overlay_type_closed")
-    }
-    overlay.classList.toggle("overlay_type_opened");
-    dashForm.classList.toggle("overlay__form_opened")
+function toggleOverlay(overlayElement){
+    const {dashForm, locationForm, imageOverlayContainer, overlay} = domElements;
     
-}
-
-function toggleLocationForm(){
-    const {locationForm, overlay} = domElements;
-    if (overlay.classList.contains("overlay_type_opened")) {
-        overlay.classList.toggle("overlay_type_closed")
+    switch (overlayElement){
+        case dashForm:
+            overlayElement.classList.toggle("overlay__form_opened")
+            break
+        case locationForm:
+            overlayElement.classList.toggle("overlay__form_opened")
+            break
+        case imageOverlayContainer:
+            overlayElement.classList.toggle("overlay__location_opened")
+            break
+        default:
+            return
     }
-    overlay.classList.toggle("overlay_type_opened")
-    locationForm.classList.toggle("overlay__form_opened")
-}
-
-function toggleImageOverlay(){
-    const {imageOverlayContainer, overlay} = domElements
-    if (overlay.classList.contains("overlay_type_opened")) {
-        overlay.classList.toggle("overlay_type_closed")
-    }
-    overlay.classList.toggle("overlay_type_opened")
-    imageOverlayContainer.classList.toggle("overlay__location_opened")
+    overlay.classList.toggle("overlay_opened")
 }
 
 function deleteLocation(e){
@@ -58,27 +49,27 @@ function likeLocation(e){
 }
 
 
-function renderCard(locationData){
+function createCard(locationData){
     const {name, link} = locationData
     const locationElement = domElements.locationTemplate.querySelector(".location").cloneNode(true);
     locationElement.querySelector(".location__title").textContent = locationData.name
     const imageElement = locationElement.querySelector(".location__image") 
     imageElement.src = link
     imageElement.alt = name
-    imageElement.addEventListener("click", ()=>{
+    imageElement.addEventListener("click", (e)=>{
         const {imageOverlayElement, imageOverlayText} = domElements
         imageOverlayElement.src = link;
         imageOverlayElement.alt = name
         imageOverlayText.textContent = name
-        toggleImageOverlay()
+        toggleOverlay(domElements.imageOverlayContainer)
     })
     locationElement.querySelector(".location__button_type_delete").addEventListener("click", deleteLocation)
     locationElement.querySelector(".location__button_type_like").addEventListener("click", likeLocation)
-    domElements.locationsContainer.prepend(locationElement)
+    return locationElement
 
 }
 
-const locationData = [
+const locationsData = [
     {
         name: "Lago di Braies",
         link: "https://code.s3.yandex.net/web-code/lago.jpg"
@@ -110,48 +101,49 @@ const locationData = [
       
 ]
 
-domElements.addLocationButton.addEventListener("click", ()=>{
-    const {nameLocationInput, imageLocationInput} = domElements
-    nameLocationInput.value = ""
-    imageLocationInput.value = ""
-    toggleLocationForm()
+domElements.addLocationButton.addEventListener("click", (e)=>{
+    const {locationForm} = domElements
+    locationForm.querySelector("form").reset()
+    toggleOverlay(domElements.locationForm)
 })
 
 domElements.locationForm.addEventListener("submit", (e)=>{
     e.preventDefault()
-    const {nameLocationInput, imageLocationInput} = domElements;
+    const {nameLocationInput, imageLocationInput, locationsContainer} = domElements;
     const name =  nameLocationInput.value
     const link = imageLocationInput.value
-    renderCard({name, link})
-    toggleLocationForm()
+    locationsContainer.prepend(createCard({name, link}))
+    toggleOverlay(domElements.locationForm)
 })
 
-domElements.closeLocationFormButton.addEventListener("click", toggleLocationForm)
+domElements.closeLocationFormButton.addEventListener("click", ()=>{
+    toggleOverlay(domElements.locationForm)
+})
 
-domElements.editButton.addEventListener("click", ()=>{
+domElements.editButton.addEventListener("click", (e)=>{
     const {userTitle, userSubtitle, nameDashInput, subtitleDashInput} = domElements;
     nameDashInput.value = userTitle.textContent;
     subtitleDashInput.value = userSubtitle.textContent;
-    toggleDashForm()
+    toggleOverlay(domElements.dashForm)
 })
 
-domElements.closeDashFormButton.addEventListener("click", toggleDashForm)
+domElements.closeDashFormButton.addEventListener("click", ()=>{
+    toggleOverlay(domElements.dashForm)
+})
 
 domElements.dashForm.addEventListener("submit", (e)=>{
     e.preventDefault();
     const {userTitle, userSubtitle, nameDashInput, subtitleDashInput} = domElements;
     userTitle.textContent = nameDashInput.value
     userSubtitle.textContent = subtitleDashInput.value
-    toggleDashForm()
+    toggleOverlay(domElements.dashForm)
 
 })
 
-domElements.overlay.addEventListener("animationend", (e)=>{
-    if (e.target.classList.contains("overlay_type_closed")){
-        e.target.classList.remove("overlay_type_closed")
-    }
+domElements.closeImageOverlayButton.addEventListener("click", ()=>{
+    toggleOverlay(domElements.imageOverlayContainer)
 })
 
-domElements.closeimageOverlayButton.addEventListener("click", toggleImageOverlay)
-
-locationData.forEach(location => renderCard(location))
+locationsData.forEach(location => {
+    domElements.locationsContainer.prepend(createCard(location))
+})

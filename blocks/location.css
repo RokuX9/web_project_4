@@ -27,6 +27,10 @@
     width: 282px;
 }
 
+.location__image:hover{
+    cursor: pointer;
+}
+
 .location__row {
     padding: 25px 15px 31px 21px;
     display: flex;
