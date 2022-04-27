@@ -1,4 +1,4 @@
-import {validate} from './validation.mjs';
+import {validate} from './validation.js';
 
 const domElements = {
     editButton: document.querySelector(".dash__button_type_edit-info"),
