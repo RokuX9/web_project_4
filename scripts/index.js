@@ -1,3 +1,5 @@
+import {validate} from './validation.mjs';
+
 const domElements = {
     editButton: document.querySelector(".dash__button_type_edit-info"),
     userTitle: document.querySelector(".dash__user-title"),
@@ -21,8 +23,32 @@ const domElements = {
     closeImageOverlayButton: document.querySelector(".overlay__location .overlay__button_type_close")
 }
 
+function handleOverlayEvents(overlay, overlayElement){
+    const removeListeners = () => {
+        document.removeEventListener("keydown", closeOverlayByKey)
+        overlay.removeEventListener("click", closeOverlayByClick) 
+    }
+    const closeOverlayByKey = (e) => {
+        if (e.key === "Escape"){
+            removeListeners() 
+            toggleOverlay(overlayElement)
+        }
+    }
+    const closeOverlayByClick = (e) => {
+        if (e.target.classList.contains("overlay")){
+            removeListeners()
+            toggleOverlay(overlayElement)
+        } 
+    }
+    if (!overlay.classList.contains("overlay_opened")){
+        document.addEventListener("keydown", closeOverlayByKey)
+        overlay.addEventListener("click", closeOverlayByClick)
+    }
+}
+
 function toggleOverlay(overlayElement){
     const {overlay} = domElements;
+    handleOverlayEvents(overlay, overlayElement)
     overlayElement.classList.toggle("overlay__element_opened")
     overlay.classList.toggle("overlay_opened")
 } 
@@ -91,6 +117,7 @@ const locationsData = [
 domElements.addLocationButton.addEventListener("click", (e) => {
     const {locationForm} = domElements
     locationForm.querySelector("form").reset()
+    validate(locationForm)
     toggleOverlay(domElements.locationForm)
 })
 
@@ -108,10 +135,11 @@ domElements.closeLocationFormButton.addEventListener("click", () => {
 })
 
 domElements.editButton.addEventListener("click", (e) => {
-    const {userTitle, userSubtitle, nameDashInput, subtitleDashInput} = domElements;
+    const {userTitle, userSubtitle, nameDashInput, subtitleDashInput, dashForm} = domElements;
     nameDashInput.value = userTitle.textContent;
     subtitleDashInput.value = userSubtitle.textContent;
-    toggleOverlay(domElements.dashForm)
+    validate(dashForm)
+    toggleOverlay(dashForm)
 })
 
 domElements.closeDashFormButton.addEventListener("click", () => {

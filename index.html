@@ -40,8 +40,14 @@
             <form name="dash-form" class="form">
                 <h2 class="form__title">Edit Profile</h2>
                 <fieldset class="form__inputs">
-                    <input type="text" placeholder="Name" name="title" class="form__input form__input_type_dash-name">
-                    <input type="text" placeholder="Subtitle" name="subtitle" class="form__input form__input_type_dash-subtitle">
+                    <div class="form__row">
+                        <input type="text" placeholder="Name" name="dash-title" minlength="2" maxlength="40" class="form__input form__input_type_dash-name" id="dash-name" required>
+                        <span class="form__input-text-error dash-name-error">An Error</span>
+                    </div>
+                    <div class="form__row">
+                        <input type="text" placeholder="Subtitle" name="dash-subtitle" minlength="2" maxlength="200" class="form__input form__input_type_dash-subtitle" id="dash-subtitle" required>
+                        <span class="form__input-text-error dash-subtitle-error">An Error</span>
+                    </div>
                 </fieldset>
                 <button type="submit" class="form__button form__button_type_save button">Save</button>
             </form>
@@ -51,8 +57,14 @@
             <form name="location-form" class="form">
                 <h2 class="form__title">New Place</h2>
                 <fieldset class="form__inputs">
-                    <input type="text" placeholder="Location Name" name="title" class="form__input form__input_type_location-name">
-                    <input type="text" placeholder="Location image URL" name="subtitle" class="form__input form__input_type_location-image-url">
+                    <div class="form__row">
+                        <input type="text" placeholder="Location Name" name="location-name" minlength="1" maxlength="30" class="form__input form__input_type_location-name" id="location-name" required>
+                        <span class="form__input-text-error location-name-error">An Error</span>
+                    </div>
+                    <div class="form__row">
+                        <input type="url" placeholder="Location image URL" name="location-url" class="form__input form__input_type_location-image-url" id="location-url" required>
+                        <span class="form__input-text-error location-url-error">An Error</span>
+                    </div>
                 </fieldset>
                 <button type="submit" class="form__button form__button_type_save button">Save</button>
             </form>
@@ -74,6 +86,7 @@
             </div>
         </div>
     </template>
-    <script src="./scripts/index.js"></script>
+    <script  src="./scripts/index.js"></script>
+    <script src="./scripts/validation.mjs"></script>
 </body>
 </html>
