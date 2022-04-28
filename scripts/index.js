@@ -30,19 +30,19 @@ function handleOverlayEvents(overlay, overlayElement){
     }
     const closeOverlayByKey = (e) => {
         if (e.key === "Escape"){
-            removeListeners() 
             toggleOverlay(overlayElement)
         }
     }
     const closeOverlayByClick = (e) => {
         if (e.target.classList.contains("overlay")){
-            removeListeners()
             toggleOverlay(overlayElement)
         } 
     }
     if (!overlay.classList.contains("overlay_opened")){
         document.addEventListener("keydown", closeOverlayByKey)
         overlay.addEventListener("click", closeOverlayByClick)
+    } else {
+        removeListeners()
     }
 }
 
