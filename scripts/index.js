@@ -23,6 +23,14 @@ const domElements = {
     closeImageOverlayButton: document.querySelector(".overlay__location .overlay__button_type_close")
 }
 
+
+
+function toggleOverlay(overlayElement){
+    const {overlay} = domElements;
+    overlayElement.classList.toggle("overlay__element_opened")
+    overlay.classList.toggle("overlay_opened")
+} 
+
 function handleOverlayEvents(overlay, overlayElement){
     const removeListeners = () => {
         document.removeEventListener("keydown", closeOverlayByKey)
@@ -31,27 +39,21 @@ function handleOverlayEvents(overlay, overlayElement){
     const closeOverlayByKey = (e) => {
         if (e.key === "Escape"){
             toggleOverlay(overlayElement)
+            removeListeners()
         }
     }
     const closeOverlayByClick = (e) => {
-        if (e.target.classList.contains("overlay")){
+        if (e.target.classList.contains("overlay_opened") || e.target.classList.contains("overlay__button_type_close")){
             toggleOverlay(overlayElement)
+            removeListeners()
         } 
     }
     if (!overlay.classList.contains("overlay_opened")){
+        toggleOverlay(overlayElement)
         document.addEventListener("keydown", closeOverlayByKey)
         overlay.addEventListener("click", closeOverlayByClick)
-    } else {
-        removeListeners()
     }
 }
-
-function toggleOverlay(overlayElement){
-    const {overlay} = domElements;
-    handleOverlayEvents(overlay, overlayElement)
-    overlayElement.classList.toggle("overlay__element_opened")
-    overlay.classList.toggle("overlay_opened")
-} 
 
 function deleteLocation(e){
     e.target.parentElement.remove()
@@ -74,12 +76,11 @@ function createCard(locationData){
         imageOverlayElement.src = link;
         imageOverlayElement.alt = name
         imageOverlayText.textContent = name
-        toggleOverlay(domElements.imageOverlayContainer)
+        handleOverlayEvents(domElements.overlay, domElements.imageOverlayContainer)
     })
     locationElement.querySelector(".location__button_type_delete").addEventListener("click", deleteLocation)
     locationElement.querySelector(".location__button_type_like").addEventListener("click", likeLocation)
     return locationElement
-
 }
 
 const locationsData = [
@@ -107,18 +108,13 @@ const locationsData = [
         name: "Yosemite Valley",
         link: "https://code.s3.yandex.net/web-code/yosemite.jpg"
       },
-      
-     
-     
-     
-      
 ]
 
 domElements.addLocationButton.addEventListener("click", (e) => {
     const {locationForm} = domElements
     locationForm.querySelector("form").reset()
     validate(locationForm)
-    toggleOverlay(domElements.locationForm)
+    handleOverlayEvents(domElements.overlay, domElements.locationForm)
 })
 
 domElements.locationForm.addEventListener("submit", (e) => {
@@ -127,23 +123,23 @@ domElements.locationForm.addEventListener("submit", (e) => {
     const name =  nameLocationInput.value
     const link = imageLocationInput.value
     locationsContainer.prepend(createCard({name, link}))
-    toggleOverlay(domElements.locationForm)
+    handleOverlayEvents(domElements.overlay, domElements.locationForm)
 })
 
 domElements.closeLocationFormButton.addEventListener("click", () => {
-    toggleOverlay(domElements.locationForm)
+    handleOverlayEvents(domElements.overlay, domElements.locationForm)
 })
 
 domElements.editButton.addEventListener("click", (e) => {
-    const {userTitle, userSubtitle, nameDashInput, subtitleDashInput, dashForm} = domElements;
+    const {userTitle, userSubtitle, nameDashInput, subtitleDashInput, dashForm, overlay} = domElements;
     nameDashInput.value = userTitle.textContent;
     subtitleDashInput.value = userSubtitle.textContent;
     validate(dashForm)
-    toggleOverlay(dashForm)
+    handleOverlayEvents(overlay, dashForm)
 })
 
 domElements.closeDashFormButton.addEventListener("click", () => {
-    toggleOverlay(domElements.dashForm)
+    handleOverlayEvents(domElements.overlay, domElements.dashForm)
 })
 
 domElements.dashForm.addEventListener("submit", (e) => {
@@ -151,12 +147,11 @@ domElements.dashForm.addEventListener("submit", (e) => {
     const {userTitle, userSubtitle, nameDashInput, subtitleDashInput} = domElements;
     userTitle.textContent = nameDashInput.value
     userSubtitle.textContent = subtitleDashInput.value
-    toggleOverlay(domElements.dashForm)
-
+    handleOverlayEvents(domElements.overlay, domElements.dashForm)
 })
 
 domElements.closeImageOverlayButton.addEventListener("click", () => {
-    toggleOverlay(domElements.imageOverlayContainer)
+    handleOverlayEvents(domElements.overlay, domElements.imageOverlayContainer)
 })
 
 locationsData.forEach(location => {
