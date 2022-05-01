@@ -67,11 +67,11 @@ const validationObject = {
 
 enableValidation(validationObject)
 
-export const validate = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll(".form__input"))
-    const buttonElement = formElement.querySelector(".form__button_type_save")
+export const clearValidation = (formElement) => {
+    const inputList = Array.from(formElement.querySelectorAll(`.${validationObject.inputSelector}`))
+    const buttonElement = formElement.querySelector(`.${validationObject.submitButtonSelector}`)
     inputList.forEach(inputElement => {
-        checkInputValidity(validationObject, formElement, inputElement)
+        hideInputError(validationObject, formElement, inputElement)
         toggleButtonState(validationObject, inputList, buttonElement)
     })
 }
