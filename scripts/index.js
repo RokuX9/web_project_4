@@ -82,6 +82,7 @@ function createCard(locationData){
         imageOverlayElement.src = link;
         imageOverlayElement.alt = name
         imageOverlayText.textContent = name
+        handleOverlayEvents(domElements.overlay, domElements.imageOverlayContainer)
     })
     locationElement.querySelector(".location__button_type_delete").addEventListener("click", deleteLocation)
     locationElement.querySelector(".location__button_type_like").addEventListener("click", likeLocation)
