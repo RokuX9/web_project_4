@@ -34,7 +34,8 @@ function toggleOverlay(overlayElement){
 function handleOverlayEvents(overlay, overlayElement){
     const removeListeners = () => {
         document.removeEventListener("keydown", closeOverlayByKey)
-        overlay.removeEventListener("click", closeOverlayByClick) 
+        overlay.removeEventListener("mousedown", closeOverlayByClick)
+        overlayElement.removeEventListener("submit", closeOverlayBySubmit) 
     }
     const closeOverlayByKey = (e) => {
         if (e.key === "Escape"){
@@ -48,10 +49,15 @@ function handleOverlayEvents(overlay, overlayElement){
             removeListeners()
         } 
     }
+    const closeOverlayBySubmit = () => {
+        toggleOverlay(overlayElement)
+        removeListeners()
+    }
     if (!overlay.classList.contains("overlay_opened")){
         toggleOverlay(overlayElement)
         document.addEventListener("keydown", closeOverlayByKey)
-        overlay.addEventListener("click", closeOverlayByClick)
+        overlay.addEventListener("mousedown", closeOverlayByClick)
+        overlayElement.addEventListener("submit", closeOverlayBySubmit)
     }
 }
 
@@ -76,7 +82,6 @@ function createCard(locationData){
         imageOverlayElement.src = link;
         imageOverlayElement.alt = name
         imageOverlayText.textContent = name
-        handleOverlayEvents(domElements.overlay, domElements.imageOverlayContainer)
     })
     locationElement.querySelector(".location__button_type_delete").addEventListener("click", deleteLocation)
     locationElement.querySelector(".location__button_type_like").addEventListener("click", likeLocation)
@@ -117,19 +122,6 @@ domElements.addLocationButton.addEventListener("click", (e) => {
     handleOverlayEvents(domElements.overlay, domElements.locationForm)
 })
 
-domElements.locationForm.addEventListener("submit", (e) => {
-    e.preventDefault()
-    const {nameLocationInput, imageLocationInput, locationsContainer} = domElements;
-    const name =  nameLocationInput.value
-    const link = imageLocationInput.value
-    locationsContainer.prepend(createCard({name, link}))
-    handleOverlayEvents(domElements.overlay, domElements.locationForm)
-})
-
-domElements.closeLocationFormButton.addEventListener("click", () => {
-    handleOverlayEvents(domElements.overlay, domElements.locationForm)
-})
-
 domElements.editButton.addEventListener("click", (e) => {
     const {userTitle, userSubtitle, nameDashInput, subtitleDashInput, dashForm, overlay} = domElements;
     nameDashInput.value = userTitle.textContent;
@@ -138,8 +130,12 @@ domElements.editButton.addEventListener("click", (e) => {
     handleOverlayEvents(overlay, dashForm)
 })
 
-domElements.closeDashFormButton.addEventListener("click", () => {
-    handleOverlayEvents(domElements.overlay, domElements.dashForm)
+domElements.locationForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+    const {nameLocationInput, imageLocationInput, locationsContainer} = domElements;
+    const name =  nameLocationInput.value
+    const link = imageLocationInput.value
+    locationsContainer.prepend(createCard({name, link}))
 })
 
 domElements.dashForm.addEventListener("submit", (e) => {
@@ -147,11 +143,6 @@ domElements.dashForm.addEventListener("submit", (e) => {
     const {userTitle, userSubtitle, nameDashInput, subtitleDashInput} = domElements;
     userTitle.textContent = nameDashInput.value
     userSubtitle.textContent = subtitleDashInput.value
-    handleOverlayEvents(domElements.overlay, domElements.dashForm)
-})
-
-domElements.closeImageOverlayButton.addEventListener("click", () => {
-    handleOverlayEvents(domElements.overlay, domElements.imageOverlayContainer)
 })
 
 locationsData.forEach(location => {
