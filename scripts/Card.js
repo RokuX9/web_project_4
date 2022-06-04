@@ -1,4 +1,4 @@
-import {domElements} from "./utils.js"
+import {domElements, openOverlay} from "./utils.js"
 
 export default class Card {
     constructor({link, name}, selector){

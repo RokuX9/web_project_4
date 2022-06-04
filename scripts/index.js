@@ -1,4 +1,4 @@
-import { clearValidation, FormValidator, validationObject } from './validation.js';
+import { FormValidator, validationObject } from './validation.js';
 import { locationsData } from './data.js';
 import { domElements, closeOverlay, openOverlay } from './utils.js';
 import Card from "./Card.js"
@@ -8,7 +8,7 @@ const validatior = new FormValidator(validationObject)
 domElements.addLocationButton.addEventListener("click", (e) => {
     const {locationForm} = domElements
     locationForm.querySelector("form").reset()
-    clearValidation(locationForm)
+    validatior.clearValidation(locationForm)
     openOverlay(locationForm)
 })
 
@@ -16,7 +16,7 @@ domElements.editButton.addEventListener("click", (e) => {
     const {userTitle, userSubtitle, nameDashInput, subtitleDashInput, dashForm, overlay} = domElements;
     nameDashInput.value = userTitle.textContent;
     subtitleDashInput.value = userSubtitle.textContent;
-    clearValidation(dashForm)
+    validatior.clearValidation(dashForm)
     openOverlay(dashForm)
 })
 

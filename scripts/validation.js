@@ -61,9 +61,18 @@ export class FormValidator{
             formElement.addEventListener("submit", (e) => {
                 e.preventDefault()
             })  
-            setEventListeners(formElement)
+            this._setEventListeners(formElement)
         })
     }
+    clearValidation(formElement) {
+        const inputList = Array.from(formElement.querySelectorAll(`.${this._inputSelector}`))
+        const buttonElement = formElement.querySelector(`.${this._submitButtonSelector}`)
+        inputList.forEach(inputElement => {
+            this._hideInputError(formElement, inputElement)
+            this._toggleButtonState(inputList, buttonElement)
+        })
+    }
+
 }
 
 export const validationObject = {
@@ -73,13 +82,4 @@ export const validationObject = {
     inactiveButtonClass: "button_inactive",
     inputErrorClass: "form__input_error",
     errorClass: "form__input-text-error_active"
-}
-
-export const clearValidation = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll(`.${validationObject.inputSelector}`))
-    const buttonElement = formElement.querySelector(`.${validationObject.submitButtonSelector}`)
-    inputList.forEach(inputElement => {
-        hideInputError(validationObject, formElement, inputElement)
-        toggleButtonState(validationObject, inputList, buttonElement)
-    })
 }
