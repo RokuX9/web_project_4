@@ -1,9 +1,9 @@
 import {domElements, openOverlay} from "./utils.js"
 
 export default class Card {
-    constructor({link, name}, selector){
-        this._link = link;
-        this._name = name;
+    constructor(data, selector){
+        this._link = data.link;
+        this._name = data.name;
         this._liked = false;
         this._selector = selector
         this._template = null
