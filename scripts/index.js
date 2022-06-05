@@ -1,6 +1,17 @@
 import { locationsData } from './data.js';
-import { domElements, dashValidatior, openOverlay, closeOverlay, locationValidator } from './utils.js';
+import { openOverlay, closeOverlay } from './utils.js';
+import { FormValidator } from './FormValidator.js';
+import { validationObject, domElements } from './constants.js';
 import Card from "./Card.js"
+
+const dashValidatior = new FormValidator(validationObject, domElements.dashForm)
+const locationValidator = new FormValidator(validationObject, domElements.locationForm)
+
+const makeCard = (data) => {
+    const card = new Card(data, "#location-template")
+    return card.getElement()
+}
+
 
 domElements.addLocationButton.addEventListener("click", (e) => {
     const {locationForm} = domElements
@@ -22,8 +33,7 @@ domElements.locationForm.addEventListener("submit", (e) => {
     const {nameLocationInput, imageLocationInput, locationsContainer, locationForm} = domElements;
     const name =  nameLocationInput.value
     const link = imageLocationInput.value
-    const card = new Card({name, link}, "#location-template")
-    locationsContainer.prepend(card.getElement())
+    locationsContainer.prepend(makeCard({name, link}))
     closeOverlay(locationForm)
 })
 
@@ -36,8 +46,7 @@ domElements.dashForm.addEventListener("submit", (e) => {
 })
 
 locationsData.forEach(location => {
-    const card = new Card (location, "#location-template")
-    domElements.locationsContainer.prepend(card.getElement())
+    domElements.locationsContainer.prepend(makeCard(location))
 })
 dashValidatior.enableValidation()
 locationValidator.enableValidation()

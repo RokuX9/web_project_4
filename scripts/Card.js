@@ -6,12 +6,7 @@ export default class Card {
         this._name = data.name;
         this._liked = false;
         this._selector = selector
-        this._template = null
         this._element = null;
-    }
-
-    _getTemplate = () => {
-        this._template = document.querySelector(this._selector).content;
     }
 
     _like = (e) => {
@@ -33,8 +28,7 @@ export default class Card {
     }
 
     getElement = () => {
-        this._getTemplate()
-        this._element = this._template.querySelector(`.location`).cloneNode(true);
+        this._element = document.querySelector(this._selector).content.querySelector(`.location`).cloneNode(true);
         this._element.querySelector(".location__title").textContent = this._name;
         const imageElement = this._element.querySelector(".location__image"); 
         imageElement.src = this._link;

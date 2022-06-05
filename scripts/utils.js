@@ -1,39 +1,6 @@
 import { FormValidator} from './FormValidator.js';
+import { domElements } from './constants.js';
 
-export const domElements = {
-    editButton: document.querySelector(".dash__button_type_edit-info"),
-    userTitle: document.querySelector(".dash__user-title"),
-    userSubtitle: document.querySelector(".dash__user-subtitle"),
-    dashForm: document.querySelector(".overlay__form_type_dash-form"),
-    nameDashInput: document.querySelector(".form__input_type_dash-name"),
-    subtitleDashInput: document.querySelector(".form__input_type_dash-subtitle"),
-    closeDashFormButton: document.querySelector(".overlay__button_type_close"),
-    overlay: document.querySelector(".overlay"),
-    likeButtons: document.querySelectorAll(".location__like-button"),
-    locationsContainer: document.querySelector(".locations"),
-    locationTemplate: document.querySelector("#location-template").content,
-    locationForm: document.querySelector(".overlay__form_type_location"),
-    nameLocationInput: document.querySelector(".form__input_type_location-name"),
-    imageLocationInput: document.querySelector(".form__input_type_location-image-url"),
-    closeLocationFormButton: document.querySelector(".overlay__form_type_location .overlay__button_type_close"),
-    addLocationButton: document.querySelector(".dash__button_type_add-place"),
-    imageOverlayContainer: document.querySelector(".overlay__location"),
-    imageOverlayElement: document.querySelector(".overlay__image"),
-    imageOverlayText: document.querySelector(".overlay__location-name"),
-    closeImageOverlayButton: document.querySelector(".overlay__location .overlay__button_type_close")
-}
-
-export const validationObject = {
-    formSelector: "form",
-    inputSelector: "form__input",
-    submitButtonSelector: "form__button_type_save",
-    inactiveButtonClass: "button_inactive",
-    inputErrorClass: "form__input_error",
-    errorClass: "form__input-text-error_active"
-}
-
-export const dashValidatior = new FormValidator(validationObject, domElements.dashForm)
-export const locationValidator = new FormValidator(validationObject, domElements.locationForm)
 
 
 function closeOverlayByKey(e){
