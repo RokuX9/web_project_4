@@ -10,21 +10,20 @@ export default class Card {
         this._element = null;
     }
 
-    _getTemplate(){
+    _getTemplate = () => {
         this._template = document.querySelector(this._selector).content;
     }
 
-    _like(e){
+    _like = (e) => {
         this._liked = !this._liked;
         e.target.classList.toggle("location__button_type_like_active")
     }
     
-    _deleteElement(e){
+    _deleteElement = (e) => {
         e.target.parentElement.remove()
-        this._element = null
     }
     
-    _setImageOverlay(){
+    _setImageOverlay = () => {
         const {imageOverlayElement, imageOverlayText, imageOverlayContainer} = domElements
         imageOverlayElement.src = this._link;
         imageOverlayElement.alt = this._name;
@@ -32,7 +31,7 @@ export default class Card {
         openOverlay(imageOverlayContainer)
     }
 
-    getElement(){
+    getElement = () => {
         this._getTemplate()
         this._element = this._template.querySelector(`.location`).cloneNode(true);
         this._element.querySelector(".location__title").textContent = this._name;

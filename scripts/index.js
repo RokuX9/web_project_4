@@ -25,7 +25,8 @@ domElements.locationForm.addEventListener("submit", (e) => {
     const {nameLocationInput, imageLocationInput, locationsContainer, locationForm} = domElements;
     const name =  nameLocationInput.value
     const link = imageLocationInput.value
-    locationsContainer.prepend(createCard({name, link}))
+    const card = new Card({name, link}, "#location-template")
+    locationsContainer.prepend(card.getElement())
     closeOverlay(locationForm)
 })
 
