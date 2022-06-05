@@ -1,4 +1,5 @@
-import {domElements, openOverlay} from "./utils.js"
+import { openOverlay } from "./utils.js"
+import { domElements } from "./constants.js";
 
 export default class Card {
     constructor(data, selector){
@@ -7,6 +8,10 @@ export default class Card {
         this._liked = false;
         this._selector = selector
         this._element = null;
+    }
+
+    _getTemplate = () => {
+        return document.querySelector(this._selector).content.querySelector(`.location`).cloneNode(true)
     }
 
     _like = (e) => {
@@ -28,7 +33,7 @@ export default class Card {
     }
 
     getElement = () => {
-        this._element = document.querySelector(this._selector).content.querySelector(`.location`).cloneNode(true);
+        this._element = this._getTemplate();
         this._element.querySelector(".location__title").textContent = this._name;
         const imageElement = this._element.querySelector(".location__image"); 
         imageElement.src = this._link;
