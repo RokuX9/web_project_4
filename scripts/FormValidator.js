@@ -1,32 +1,33 @@
 export class FormValidator{
-    constructor(validationObject){
+    constructor(validationObject, formElement){
         this._formSelector = validationObject.formSelector;
         this._inputSelector = validationObject.inputSelector;
         this._submitButtonSelector = validationObject.submitButtonSelector;
         this._inactiveButtonClass = validationObject.inactiveButtonClass;
         this._inputErrorClass = validationObject.inputErrorClass;
         this._errorClass = validationObject.errorClass;
+        this._formElement = formElement;
     }
 
-    _showInputError = (formElement, inputElement, errorMessage) => {
-        const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
+    _showInputError = (inputElement, errorMessage) => {
+        const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`)
         inputElement.classList.add(this._inputErrorClass)
         errorElement.textContent = errorMessage
         errorElement.classList.add(this._errorClass)
     }
 
-    _hideInputError = (formElement, inputElement) => {
-        const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
+    _hideInputError = (inputElement) => {
+        const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`)
         inputElement.classList.remove(this._inputErrorClass)
         errorElement.textContent = ""
         errorElement.classList.remove(this._errorClass)
     }
 
-    _checkInputValidity = (formElement, inputElement) => {
+    _checkInputValidity = (inputElement) => {
         if (!inputElement.validity.valid) {
-            this._showInputError(formElement, inputElement, inputElement.validationMessage)
+            this._showInputError(inputElement, inputElement.validationMessage)
         } else {
-            this._hideInputError(formElement, inputElement)
+            this._hideInputError(inputElement)
         }
     }
 
@@ -44,42 +45,31 @@ export class FormValidator{
         }
     }
 
-    _setEventListeners = (formElement) => {
-        const inputList = Array.from(formElement.querySelectorAll(`.${this._inputSelector}`))
-        const buttonElement = formElement.querySelector(`.${this._submitButtonSelector}`)
+    _setEventListeners = () => {
+        const inputList = Array.from(this._formElement.querySelectorAll(`.${this._inputSelector}`))
+        const buttonElement = this._formElement.querySelector(`.${this._submitButtonSelector}`)
         this._toggleButtonState(inputList, buttonElement)
         inputList.forEach(inputElement => {
             inputElement.addEventListener("input", () => {
-                this._checkInputValidity(formElement, inputElement)
+                this._checkInputValidity(inputElement)
                 this._toggleButtonState(inputList, buttonElement)
             })
         })
     }
     enableValidation = () => {
-        const formList = Array.from(document.querySelectorAll(`.${this._formSelector}`))
-        formList.forEach(formElement => {
-            formElement.addEventListener("submit", (e) => {
+            this._formElement.addEventListener("submit", (e) => {
                 e.preventDefault()
             })  
-            this._setEventListeners(formElement)
-        })
+            this._setEventListeners()
     }
-    clearValidation = (formElement) => {
-        const inputList = Array.from(formElement.querySelectorAll(`.${this._inputSelector}`))
-        const buttonElement = formElement.querySelector(`.${this._submitButtonSelector}`)
+    clearValidation = () => {
+        const inputList = Array.from(this._formElement.querySelectorAll(`.${this._inputSelector}`))
+        const buttonElement = this._formElement.querySelector(`.${this._submitButtonSelector}`)
         inputList.forEach(inputElement => {
-            this._hideInputError(formElement, inputElement)
-            this._toggleButtonState(inputList, buttonElement)
+            this._hideInputError(inputElement)
         })
+        this._toggleButtonState(inputList, buttonElement)
     }
 
 }
 
-export const validationObject = {
-    formSelector: "form",
-    inputSelector: "form__input",
-    submitButtonSelector: "form__button_type_save",
-    inactiveButtonClass: "button_inactive",
-    inputErrorClass: "form__input_error",
-    errorClass: "form__input-text-error_active"
-}

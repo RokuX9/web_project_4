@@ -20,10 +20,11 @@ export default class Card {
     }
     
     _deleteElement = (e) => {
-        e.target.parentElement.remove()
+        this._element.remove()
+        this._element = null
     }
     
-    _setImageOverlay = () => {
+    _openImageOverlay = () => {
         const {imageOverlayElement, imageOverlayText, imageOverlayContainer} = domElements
         imageOverlayElement.src = this._link;
         imageOverlayElement.alt = this._name;
@@ -38,7 +39,7 @@ export default class Card {
         const imageElement = this._element.querySelector(".location__image"); 
         imageElement.src = this._link;
         imageElement.alt = this._name;
-        imageElement.addEventListener("click", this._setImageOverlay)
+        imageElement.addEventListener("click", this._openImageOverlay)
         this._element.querySelector(".location__button_type_delete").addEventListener("click", this._deleteElement)
         this._element.querySelector(".location__button_type_like").addEventListener("click", this._like)
         return this._element
