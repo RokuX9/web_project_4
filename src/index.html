@@ -7,13 +7,12 @@
     <meta name="author" content="Dean N."/>
     <meta name="description" content="Responsive design project" />
     <meta name="keywords" content="html, css, javascript, usa, travel, pracricum, yandex"/>
-    <link rel="stylesheet" href="./pages/index.css">
     <title>Around The U.S.</title>
 </head>
 <body class="body">
     <div class="page">
         <header class="header">
-            <img src="./images/header-logo.svg" alt="around the us" class="header__logo">
+            <div class="header__logo"></div>
         </header>
         <main>
             <section class="dash">
@@ -41,11 +40,11 @@
                 <h2 class="form__title">Edit Profile</h2>
                 <fieldset class="form__inputs">
                     <div class="form__row">
-                        <input type="text" placeholder="Name" name="dash-title" minlength="2" maxlength="40" class="form__input form__input_type_dash-name" id="dash-name" required>
+                        <input type="text" placeholder="Name" name="name" minlength="2" maxlength="40" class="form__input form__input_type_dash-name" id="dash-name" required>
                         <span class="form__input-text-error dash-name-error">An Error</span>
                     </div>
                     <div class="form__row">
-                        <input type="text" placeholder="Subtitle" name="dash-subtitle" minlength="2" maxlength="200" class="form__input form__input_type_dash-subtitle" id="dash-subtitle" required>
+                        <input type="text" placeholder="Title" name="title" minlength="2" maxlength="200" class="form__input form__input_type_dash-subtitle" id="dash-subtitle" required>
                         <span class="form__input-text-error dash-subtitle-error">An Error</span>
                     </div>
                 </fieldset>
@@ -58,11 +57,11 @@
                 <h2 class="form__title">New Place</h2>
                 <fieldset class="form__inputs">
                     <div class="form__row">
-                        <input type="text" placeholder="Location Name" name="location-name" minlength="1" maxlength="30" class="form__input form__input_type_location-name" id="location-name" required>
+                        <input type="text" placeholder="Location Name" name="name" minlength="1" maxlength="30" class="form__input form__input_type_location-name" id="location-name" required>
                         <span class="form__input-text-error location-name-error">An Error</span>
                     </div>
                     <div class="form__row">
-                        <input type="url" placeholder="Location image URL" name="location-url" class="form__input form__input_type_location-image-url" id="location-url" required>
+                        <input type="url" placeholder="Location image URL" name="link" class="form__input form__input_type_location-image-url" id="location-url" required>
                         <span class="form__input-text-error location-url-error">An Error</span>
                     </div>
                 </fieldset>
@@ -86,6 +85,5 @@
             </div>
         </div>
     </template>
-    <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>

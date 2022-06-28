@@ -1,13 +1,11 @@
-import { openOverlay } from "./utils.js"
-import { domElements } from "./constants.js";
-
 export default class Card {
-    constructor(data, selector){
+    constructor(data, selector, handleCardClick){
         this._link = data.link;
         this._name = data.name;
         this._liked = false;
         this._selector = selector
         this._element = null;
+        this._handleCardClick = handleCardClick
     }
 
     _getTemplate = () => {
@@ -25,11 +23,7 @@ export default class Card {
     }
     
     _openImageOverlay = () => {
-        const {imageOverlayElement, imageOverlayText, imageOverlayContainer} = domElements
-        imageOverlayElement.src = this._link;
-        imageOverlayElement.alt = this._name;
-        imageOverlayText.textContent = this._name;
-        openOverlay(imageOverlayContainer)
+        this._handleCardClick({name: this._name, link: this._link})
     }
 
     getElement = () => {
