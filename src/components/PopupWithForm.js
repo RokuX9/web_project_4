@@ -6,9 +6,11 @@ export default class PopupWithForm extends Popup {
         this._popupElement = document.querySelector(popupElementSelector)
         this._inputList = Array.from(this._popupElement.querySelectorAll(inputSelector));
         this._closePopupCallback = closePopupCallback;
+        this._formElement = this._popupElement.querySelector(".form")
+        this.formInputs = this._formElement.elements
     }
 
-    _getInputValues = () => {
+    getInputValues = () => {
         return this._inputList.reduce((previousValue, input) => {
             previousValue[input.name] = input.value;
             return previousValue
@@ -35,11 +37,11 @@ export default class PopupWithForm extends Popup {
         this._popupElement.classList.add('overlay__element_opened')
         this.setEventListeners()
         super.open()
-        console.log(this._popupElement.querySelector('.form').elements.name)
     }
 
     close(){
         this._popupElement.classList.remove('overlay__element_opened')
+        this._formElement.reset()
         this.removeEventListeners()
         super.close()
     }

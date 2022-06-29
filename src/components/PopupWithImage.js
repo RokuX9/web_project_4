@@ -10,15 +10,15 @@ export default class PopupWithImage extends Popup {
 
     open = (data) => {
         super.setEventListeners()
-        super.open();
         this._imageElement.src = data.link;
         this._textElement.textContent = data.name;
         this._imageContainer.classList.add('overlay__element_opened');
+        super.open();
     }
 
     close = () => {
-        super.close();
         super.removeEventListeners()
         this._imageContainer.classList.remove('overlay__element_opened');
+        super.close();
     }
 }

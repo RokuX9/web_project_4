@@ -1,12 +1,12 @@
-import './styles/index.css'
-import { locationsData } from './scripts/data.js';
-import { FormValidator } from './scripts/FormValidator.js';
-import { validationObject, domElements } from './scripts/constants.js';
-import Card from "./scripts/Card.js";
-import Section from './scripts/Section';
-import PopupWithForm from './scripts/PopupWithForm';
-import PopupWithImage from './scripts/PopupWithImage';
-import UserInfo from './scripts/UserInfo';
+import './index.css'
+import { locationsData } from '../utils/data.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { validationObject, domElements } from '../utils/constants.js';
+import Card from "../components/Card.js";
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
 
 const dashValidatior = new FormValidator(validationObject, domElements.dashForm)
 const locationValidator = new FormValidator(validationObject, domElements.locationForm)
@@ -14,14 +14,13 @@ const dashInfo = new UserInfo({nameSelector: '.dash__user-title', titleSelector:
 const imageOverlay = new PopupWithImage({popupSelector: '.overlay', containerSelector: '.overlay__location', imageSelector: '.overlay__image', textSelector: '.overlay__location-name'})
 const dashOverlay = new PopupWithForm({popupSelector: '.overlay', popupElementSelector: '.overlay__form_type_dash-form', inputSelector: '.form__input'}, (e) => {
     e.preventDefault()
-    dashInfo.setUserInfo(dashOverlay._getInputValues())
+    dashInfo.setUserInfo(dashOverlay.getInputValues())
     dashOverlay.close()
 })
 
 const locationOverlay = new PopupWithForm({popupSelector: '.overlay', popupElementSelector: '.overlay__form_type_location', inputSelector: '.form__input'}, (e) => {
     e.preventDefault();
-    console.log(locationSection, locationOverlay._getInputValues())
-    locationSection.addItem(makeCard(locationOverlay._getInputValues()))
+    locationSection.addItem(makeCard(locationOverlay.getInputValues()))
     locationOverlay.close()
 })
 
@@ -36,17 +35,16 @@ const makeCard = (data) => {
 
 
 domElements.addLocationButton.addEventListener("click", (e) => {
-    locationOverlay._popupElement.querySelector(".form").reset()
-    locationValidator.clearValidation(locationOverlay._popupElement)
+    locationValidator.clearValidation()
     locationOverlay.open()
 })
 
 domElements.editButton.addEventListener("click", (e) => {
     const data = dashInfo.getUserInfo()
-    const {name, title} = dashOverlay._popupElement.querySelector('.form').elements;
+    const {name, title} = dashOverlay.formInputs
     name.value = data.name
     title.value = data.title
-    dashValidatior.clearValidation(dashOverlay._element)
+    dashValidatior.clearValidation()
     dashOverlay.open()
 }) 
 
