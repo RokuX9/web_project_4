@@ -29,13 +29,17 @@ const locationSection = new Section({data: locationsData, renderer: (location) =
 }}, '.locations')
 
 const makeCard = (data) => {
-    const card = new Card(data, "#location-template", imageOverlay.open)
+    const card = new Card(data, "#location-template", (data) => {
+        imageOverlay.setEventListeners();
+        imageOverlay.open(data);
+    })
     return card.getElement()
 }
 
 
 domElements.addLocationButton.addEventListener("click", (e) => {
     locationValidator.clearValidation()
+    locationOverlay.setEventListeners()
     locationOverlay.open()
 })
 
@@ -45,6 +49,7 @@ domElements.editButton.addEventListener("click", (e) => {
     name.value = data.name
     title.value = data.title
     dashValidatior.clearValidation()
+    dashOverlay.setEventListeners()
     dashOverlay.open()
 }) 
 

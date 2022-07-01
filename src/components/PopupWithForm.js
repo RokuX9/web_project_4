@@ -2,11 +2,10 @@ import Popup from "./Popup";
 
 export default class PopupWithForm extends Popup {
     constructor({popupSelector, popupElementSelector, inputSelector}, closePopupCallback){
-        super(popupSelector);
-        this._popupElement = document.querySelector(popupElementSelector)
-        this._inputList = Array.from(this._popupElement.querySelectorAll(inputSelector));
+        super(popupSelector, popupElementSelector);
+        this._inputList = Array.from(this._containerElement.querySelectorAll(inputSelector));
+        this._formElement = this._containerElement.querySelector(".form")
         this._closePopupCallback = closePopupCallback;
-        this._formElement = this._popupElement.querySelector(".form")
         this.formInputs = this._formElement.elements
     }
 
@@ -25,24 +24,21 @@ export default class PopupWithForm extends Popup {
 
     setEventListeners(){
         super.setEventListeners()
-        this._popupElement.addEventListener('submit', this._closePopupCallback)
+        this._formElement.addEventListener('submit', this._closePopupCallback)
     }
 
-    removeEventListeners(){
-        super.removeEventListeners()
-        this._popupElement.removeEventListener('submit', this._closePopupCallback)
+    _removeEventListeners(){
+        this._formElement.removeEventListener('submit', this._closePopupCallback)
+        super._removeEventListeners()
     }
 
     open(){
-        this._popupElement.classList.add('overlay__element_opened')
-        this.setEventListeners()
         super.open()
     }
 
     close(){
-        this._popupElement.classList.remove('overlay__element_opened')
         this._formElement.reset()
-        this.removeEventListeners()
+        this._removeEventListeners()
         super.close()
     }
 }
