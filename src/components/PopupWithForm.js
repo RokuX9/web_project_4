@@ -29,16 +29,13 @@ export default class PopupWithForm extends Popup {
 
     _removeEventListeners(){
         this._formElement.removeEventListener('submit', this._closePopupCallback)
-        super._removeEventListeners()
-    }
-
-    open(){
-        super.open()
     }
 
     close(){
         this._formElement.reset()
+        //removes the sumbit event Listener
         this._removeEventListeners()
+        //removes click and keydown event Listeners
         super.close()
     }
 }
