@@ -9,6 +9,10 @@
     pointer-events: none;
 }
 
+.button_visible {
+    display: block;
+}
+
 .button:hover {
     cursor: pointer;
 }

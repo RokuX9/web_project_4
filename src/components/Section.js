@@ -4,9 +4,19 @@ export default class Section {
       this._renderer = renderer;
       this._container = document.querySelector(containerSelector);
     }
+
+    getInitialItems(data){
+      this._renderedItems = data
+    }
   
     addItem(element) {
       this._container.prepend(element);
+    }
+
+    deleteItem(deletedItem){
+      this._renderedItems = this._renderedItems.filter(item => {
+        return item !== deletedItem
+      })
     }
   
     clear() {

@@ -7,6 +7,14 @@ export const validationObject = {
     errorClass: "form__input-text-error_active"
 }
 
+export const ApiObject = {
+    baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
+    headers: {
+        authorization: "af221e9d-d09f-46f1-bd82-7b0c5297a738",
+        "Content-Type": "application/json"
+    }
+}
+
 export const domElements = {
     editButton: document.querySelector(".dash__button_type_edit-info"),
     userTitle: document.querySelector(".dash__user-title"),

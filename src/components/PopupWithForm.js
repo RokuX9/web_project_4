@@ -17,8 +17,8 @@ export default class PopupWithForm extends Popup {
     }
 
     setInputs = (data) => {
-        for (i=0; i<data.length; i++){
-            this._inputList[i] = data[i]
+        for (let i=0; i<data.length; i++){
+            this._inputList[i].value = data[i]
         }
     }
 
