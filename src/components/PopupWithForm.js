@@ -27,8 +27,10 @@ export default class PopupWithForm extends Popup {
     renderLoading(isLoading){
         if (isLoading){
             this._buttonElement.textContent = "Saving..."
+            this._buttonElement.disabled = true
         } else {
             this._buttonElement.textContent = this._buttonElementTextContent
+            this._buttonElement.disabled = false
         }
     }
 
