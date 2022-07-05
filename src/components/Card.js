@@ -1,5 +1,5 @@
 export default class Card {
-    constructor(data, selector, isOwner, handleCardClick, handleDeleteClick){
+    constructor(data, selector, isOwner, handleCardClick, handleDeleteClick, handleLikeObj){
         this.id = data._id
         this._isOwner = isOwner
         this._link = data.link;
@@ -10,6 +10,7 @@ export default class Card {
         this._handleCardClick = handleCardClick
         this._likes = data.likes
         this._handleDeleteClick = handleDeleteClick
+        this._handleLikeObj = handleLikeObj
     }
 
     _getTemplate = () => {
@@ -17,8 +18,15 @@ export default class Card {
     }
 
     _like = (e) => {
-        this._liked = !this._liked;
-        e.target.classList.toggle("location__button_type_like_active")
+        const updatedLikes = !this._liked ? this._handleLikeObj.like(this.id) : this._handleLikeObj.unlike(this.id)
+        updatedLikes.then(res => {
+            this._likes = res.likes
+            this.updateLike()
+        })
+    }
+
+    getLikes(){
+        return this._likes.map(user => user._id)
     }
     
     _openImageOverlay = (e) => {
@@ -46,6 +54,12 @@ export default class Card {
         this._element = null
     }
 
+    updateLike(){
+        this._likeCounter.textContent = this._likes.length
+        this._liked = !this._liked;
+        this._likeButton.classList.toggle("location__button_type_like_active")
+    }
+
     getElement = () => {
         this._element = this._getTemplate();
         this._binElement = this._element.querySelector(".location__button_type_delete")
@@ -55,8 +69,8 @@ export default class Card {
         this._element.id = this.id
         this._imageElement = this._element.querySelector(".location__image");
         this._likeCounter = this._element.querySelector(".location__like-number") 
+        this._likeButton = this._element.querySelector(".location__button_type_like")
         this._element.querySelector(".location__title").textContent = this._name;
-        this._likeCounter.textContent = this._likes.length
         this._imageElement.src = this._link;
         this._imageElement.alt = this._name; 
         this._setEventListeners()

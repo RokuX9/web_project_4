@@ -35,5 +35,7 @@ export const domElements = {
     imageOverlayContainer: document.querySelector(".overlay__location"),
     imageOverlayElement: document.querySelector(".overlay__image"),
     imageOverlayText: document.querySelector(".overlay__location-name"),
-    closeImageOverlayButton: document.querySelector(".overlay__location .overlay__button_type_close")
+    closeImageOverlayButton: document.querySelector(".overlay__location .overlay__button_type_close"),
+    dashImageEditButton: document.querySelector(".dash__button_type_edit-image"),
+    dashImageForm: document.querySelector(".overlay__form_type_dash-image")
 }

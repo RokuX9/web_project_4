@@ -13,6 +13,26 @@
     background-size: cover;
 }
 
+.dash__button_type_edit-image {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    background-image: url("../images/pencil.svg");
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0, 0, 0, .8);
+    border: 0;
+    visibility: none;
+    opacity: 0;
+    transition: visibility 0s .5s linear, opacity .5s linear;
+}
+
+.dash__button_type_edit-image:hover {
+    visibility: visible;
+    opacity: 1;
+}
+
 .dash__text {
     color: white;
     display: flex;

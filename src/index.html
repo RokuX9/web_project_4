@@ -16,7 +16,7 @@
         </header>
         <main>
             <section class="dash">
-                <div class="dash__profile-image"></div>
+                <div class="dash__profile-image"><button class="dash__button dash__button_type_edit-image button"></button></div>
                 <div class="dash__text">
                     <div class="dash__line">
                         <h1 class="dash__user-title">Jacques Cousteau</h1>
@@ -35,6 +35,19 @@
         </footer>
     </div>
     <div class="overlay">
+        <div class="overlay__form overlay__form_type_dash-image overlay__element">
+            <form name="dash-image-edit" class="form">
+                <h2 class="form__title">Change profile picture</h2>
+                <fieldset class="form__inputs">
+                    <div class="form__row">
+                        <input type="url" placeholder="Avatar Image Link" name="avatar" class="form__input form__input_type_dash-image" id="dash-image" required>
+                        <span class="form__input-text-error dash-image-error">An Error</span>
+                    </div>
+                </fieldset>
+                <button type="submit" class="form__button form__button_type_save button">Save</button>
+            </form>
+            <button type="button" class="overlay__button overlay__button_type_close button"></button>
+        </div>
         <div class="overlay__form overlay__form_type_dash-form overlay__element">
             <form name="dash-form" class="form">
                 <h2 class="form__title">Edit Profile</h2>
@@ -80,7 +93,7 @@
                 <input type="hidden" class="form__input form__input_type_location-id" name="id" id="location-id">
                 <button type="submit" class="form__button form__button_type_save button">Yes</button>
             </form>
-            <button type="submit" class="overlay__button overlay__button_type_close button"></button>
+            <button type="button" class="overlay__button overlay__button_type_close button"></button>
         </div>
     </div>
     <template id="location-template">
