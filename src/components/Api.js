@@ -17,20 +17,20 @@ export default class Api {
         }
     }
 
-    _logError(err){
+    logError(err){
         console.log(err)
     }
 
     getInitialCards(){
         return fetch(`${this._baseUrl}/cards`, {
             headers: this._headers
-        }).then(this._checkResponseStatus).catch(this._logError)
+        }).then(this._checkResponseStatus)
     }
 
     getUserInfo(){
         return fetch(`${this._baseUrl}/users/me`, {
             headers: this._headers
-        }).then(this._checkResponseStatus).catch(this._logError)
+        }).then(this._checkResponseStatus)
     }
 
     setUserInfo(data){
@@ -38,7 +38,7 @@ export default class Api {
             method: 'PATCH',
             headers : this._headers,
             body: JSON.stringify(data)
-        }).then(this._checkResponseStatus).catch(this._logError)
+        }).then(this._checkResponseStatus)
     }
 
     addNewCard(data){
@@ -46,28 +46,28 @@ export default class Api {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify(data)
-        }).then(this._checkResponseStatus).catch(this._logError)
+        }).then(this._checkResponseStatus)
     }
 
     deleteCard({id}){
         return fetch(`${this._baseUrl}/cards/${id}`, {
             method: "DELETE",
             headers: this._headers
-        }).then(this._checkResponseStatus).catch(this._logError)
+        }).then(this._checkResponseStatus)
     }
 
     likeCard = (id) => {
         return fetch(`${this._baseUrl}/cards/likes/${id}`, {
             method: "PUT",
             headers: this._headers
-        }).then(this._checkResponseStatus).catch(this._logError)
+        }).then(this._checkResponseStatus)
     }
 
     unlikeCard = (id) => {
         return fetch(`${this._baseUrl}/cards/likes/${id}`, {
             method: "DELETE",
             headers: this._headers
-        }).then(this._checkResponseStatus).catch(this._logError)
+        }).then(this._checkResponseStatus)
     }
 
     changeProfilePicture(data){
@@ -75,7 +75,7 @@ export default class Api {
             method: "PATCH",
             headers: this._headers,
             body: JSON.stringify(data)
-        }).then(this._checkResponseStatus).catch(this._logError)
+        }).then(this._checkResponseStatus)
     }
 
 }

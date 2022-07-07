@@ -32,7 +32,7 @@ export default class Section {
       this._data = this._data.filter(item => {
         return item._id !== deletedItem.id
       })
-      this.renderElements()
+      this.deleteElement(deletedItem.id)
     }
   
     clear() {
@@ -41,6 +41,11 @@ export default class Section {
 
     appendElement(element){
       this._container.prepend(element)
+    }
+
+    deleteElement(id){
+      const elementToDelete = this._container.querySelector(`#${CSS.escape(id)}`);
+      elementToDelete.remove()
     }
   
     renderElements() {
