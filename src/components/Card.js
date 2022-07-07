@@ -22,7 +22,7 @@ export default class Card {
         updatedLikes.then(res => {
             this._likes = res.likes
             this.updateLike()
-        }).catch(this._handleLikeObj.catch)
+        }).catch(this._handleLikeObj.logError)
     }
 
     getLikes(){

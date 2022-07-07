@@ -68,10 +68,7 @@ const deleteLocationOverlay = new PopupWithForm({popupSelector: '.overlay', popu
     deleteLocationOverlay.renderLoading(true)
     apiEntry.deleteCard(elementIdObj).then(res => {
         locationSection.deleteItem(elementIdObj)
-    }).finally(res => {
-        deleteLocationOverlay.renderLoading(false)
-        deleteLocationOverlay.close()
-    }).catch(apiEntry.logError)
+    }).then(res => deleteLocationOverlay.close()).finally(res => deleteLocationOverlay.renderLoading(false)).catch(apiEntry.logError)
 })
 
 domElements.addLocationButton.addEventListener("click", (e) => {
@@ -91,6 +88,7 @@ domElements.editButton.addEventListener("click", (e) => {
 })
 
 domElements.dashImageEditButton.addEventListener("click", (e) => {
+    validatorsObject.dashImageValidator.clearValidation()
     dashImageOverlay.setEventListeners()
     dashImageOverlay.open()
 })

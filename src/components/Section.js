@@ -25,7 +25,7 @@ export default class Section {
   
     addItem(item) {
       this._data = [... this._data, item]
-      this.renderElements()
+      this.appendElement(this._renderer(item, this._userId))
     }
 
     deleteItem(deletedItem){
